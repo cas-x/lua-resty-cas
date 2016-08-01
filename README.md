@@ -22,9 +22,10 @@ A component for nginx access phase module integrated with CAS
 lua-resty-cas is based on the cas-server、nginx_lua_module and the ssl mutual authentication under the hood. It working on the access phase of nginx. Before acess the real content, we will get the certificate info from nginx and pass them to the cas-server to check whether the certificate is right.
 
 # How To Deploy
-At First let us show the arch about these component as the following:
+At First let us show the architecture about these component as the following:
 
 ![lua-rest-cas](https://raw.githubusercontent.com/cas-x/lua-resty-cas/master/docs/images/lua-resty-cas.jpg)
+
 the nginx conf like this as the following:
 
 ````
@@ -51,3 +52,19 @@ the nginx conf like this as the following:
 ````
 
 
+Contributing
+------------
+
+To contribute to lua-resty-cas, clone this repo locally and commit your code on a separate branch. 
+
+
+Author
+------
+
+> GitHub [@detailyang](https://github.com/detailyang)     
+  
+
+License
+-------
+
+lua-resty-cas is licensed under the [MIT] license. 
