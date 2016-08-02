@@ -3,6 +3,10 @@ local http = require "lib.resty.http"
 local find = string.find
 local cas = ngx.shared.cas
 
+-- only server enabled ssl will requires authenticate
+if ngx.var.ssl_cipher == nil then
+    return
+end
 
 if ngx.var.ssl_sesion_id ~= nil and cas ~= nil and cas:get(ngx.var.ssl_sesion_id) then
   return
@@ -35,7 +39,6 @@ if bp == nil and ep == nil then
 end
 
 if cas ~= nil then
-  ngx.say(ngx.var.ssl_sesion_id)
   if ngx.var.ssl_sesion_id then
     -- cache one hour
     cas:set(ngx.var.ssl_sesion_id, true, 60*60)
