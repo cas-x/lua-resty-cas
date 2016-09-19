@@ -29,7 +29,6 @@ At First let us show the architecture about these component as the following:
 the nginx conf like this as the following:
 
 ````
-    lua_code_cache off;
     lua_package_path '/shared/art/opensource/personal/cas/lua-resty-cas/?.lua';
     access_by_lua_file '/shared/art/opensource/personal/cas/lua-resty-cas/cas.lua';
 
