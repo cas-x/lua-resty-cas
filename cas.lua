@@ -9,7 +9,7 @@ if ngx.var.ssl_cipher == nil then
 end
 
 if ngx.var.ssl_sesion_id ~= nil and cas ~= nil and cas:get(ngx.var.ssl_sesion_id) then
-  return
+    return
 end
 
 local httpc = http.new()
@@ -24,8 +24,9 @@ local res, err = httpc:request_uri(config.pkiuri, {
   })
 
 if not res then
-  ngx.say("failed to connect CAS " .. config.pkiuri, ":", err)
-  ngx.exit(500)
+    ngx.header.content_type = 'text/html';
+    ngx.say("failed to connect CAS " .. config.pkiuri, ":", err)
+    ngx.exit(500)
 
   return
 end
@@ -34,13 +35,14 @@ local body = res.body
 local bp, ep = find(body, '\"code\":0')
 
 if bp == nil and ep == nil then
-  ngx.say(body)
-  ngx.exit(403)
+    ngx.header.content_type = 'application/json';
+    ngx.say(body)
+    ngx.exit(403)
 end
 
 if cas ~= nil then
-  if ngx.var.ssl_sesion_id then
-    -- cache one hour
-    cas:set(ngx.var.ssl_sesion_id, true, 60*60)
-  end
+    if ngx.var.ssl_sesion_id then
+        -- cache one hour
+        cas:set(ngx.var.ssl_sesion_id, true, 60*60)
+    end
 end
