@@ -1,5 +1,8 @@
 local _M = {
-    pkiuri = 'https://cas.example.com/public/pkis/crt'
+    pkiuri = 'http://172.17.9.72:3000/public/pkis/crt',
+    jwt = {
+        expire = 15 * 60
+    }
 }
 
 return _M
