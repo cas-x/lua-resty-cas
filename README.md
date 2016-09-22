@@ -29,24 +29,29 @@ At First let us show the architecture about these component as the following:
 the nginx conf like this as the following:
 
 ````
-    lua_package_path '/shared/art/opensource/personal/cas/lua-resty-cas/?.lua';
-    access_by_lua_file '/shared/art/opensource/personal/cas/lua-resty-cas/cas.lua';
+    env CAS-URL=http://172.17.9.72:3000;
 
-    server {
-    listen 443 ssl;
-    server_name example.com;
+    http {
+      lua_package_path '/shared/art/opensource/personal/cas/lua-resty-cas/?.lua';
+      access_by_lua_file '/shared/art/opensource/personal/cas/lua-resty-cas/cas.lua';
 
-    ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
-    ssl_prefer_server_ciphers on;
-    ssl_ciphers "EECDH+ECDSA+AESGCM:EECDH+aRSA+AESGCM:EECDH+ECDSA+SHA256:EECDH+aRSA+SHA256:EECDH+ECDSA+SHA384:EECDH+ECDSA+SHA256:EECDH+aRSA+SHA384:EDH+aRSA+AESGCM:EDH+aRSA+SHA256:EDH+aRSA:EECDH:!aNULL:!eNULL:!MEDIUM:!LOW:!3DES:!MD5:!EXP:!PSK:!SRP:!DSS:!RC4:!SEED";
+      server {
+      listen 443 ssl;
+      server_name example.com;
 
-    ssl_certificate      /opt/nginx/ssl/CN=example.com.crt;
-    ssl_certificate_key  /opt/nginx/ssl/CN=example.com.key;
-    ssl_trusted_certificate /opt/nginx/ssl/ca.crt;
-    ssl_stapling on;
-    ssl_stapling_verify on;
-    ssl_client_certificate /opt/ssl/ca.crt;
-    ssl_verify_client on; #it require client to present certificate from cas
+      ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
+      ssl_prefer_server_ciphers on;
+      ssl_ciphers "EECDH+ECDSA+AESGCM:EECDH+aRSA+AESGCM:EECDH+ECDSA+SHA256:EECDH+aRSA+SHA256:EECDH+ECDSA+SHA384:EECDH+ECDSA+SHA256:EECDH+aRSA+SHA384:EDH+aRSA+AESGCM:EDH+aRSA+SHA256:EDH+aRSA:EECDH:!aNULL:!eNULL:!MEDIUM:!LOW:!3DES:!MD5:!EXP:!PSK:!SRP:!DSS:!RC4:!SEED";
+
+      ssl_certificate      /opt/nginx/ssl/CN=example.com.crt;
+      ssl_certificate_key  /opt/nginx/ssl/CN=example.com.key;
+      ssl_trusted_certificate /opt/nginx/ssl/ca.crt;
+      ssl_stapling on;
+      ssl_stapling_verify on;
+      ssl_client_certificate /opt/ssl/ca.crt;
+      ssl_verify_client on; #it require client to present certificate from cas
+    
+    }
 ````
 
 
